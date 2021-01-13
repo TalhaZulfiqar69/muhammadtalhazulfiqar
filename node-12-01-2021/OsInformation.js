@@ -15,9 +15,8 @@ const OsInformation = `OS information:
 ${JSON.stringify(OsInfo)}.`;
 
 fs.writeFile(process.env.PATH_WITH_FILE_NAME, OsInformation, (err) => {
-    if (err) throw err;
-    console.log("Task completed");
-
+  if (err) throw err;
+  console.log("Task completed");
 });
 
 module.exports = fs;
