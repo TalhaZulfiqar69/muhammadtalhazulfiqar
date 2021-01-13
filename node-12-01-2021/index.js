@@ -1,7 +1,51 @@
-const express = require('express');
-const app = express();
-require('./OsInformation');
+require("dotenv").config();
+const fs = require("fs");
+const os = require("os");
+const path = require("path");
 
-app.listen(process.env.SERVER_PORT || 3000, (req, res) => {
-  console.log(`Server is listened on port ${process.env.SERVER_PORT || 3000}`);
-});
+const cup = os.cpus();
+const platform = os.platform();
+const architecture = os.arch();
+
+const dirName = `${os.homedir()}/Desktop`;
+
+const OsInformation = {
+  cup,
+  platform,
+  architecture,
+};
+
+const filPath = path.join(`${dirName}/${process.env.FILE_NAME}`);
+
+const writeOSInformation = () => {
+  try {
+    // eslint-disable-next-line consistent-return
+    fs.open(filPath, "r", (err) => {
+      if (err) {
+        return new Promise((resolve, reject) => {
+          fs.writeFile(
+            path.join(`${dirName}/${process.env.FILE_NAME}`),
+            `OS information:
+        ${JSON.stringify(OsInformation)}.`,
+            (writeFileError) => {
+              if (writeFileError) {
+                reject(writeFileError);
+                return;
+              }
+              resolve(path.join(`${dirName}/${process.env.FILE_NAME}`));
+              // eslint-disable-next-line no-console
+              console.log("File has been created successfully");
+            }
+          );
+        });
+      }
+      // eslint-disable-next-line no-console
+      console.log("File is aleardy exist");
+    });
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
+  }
+};
+
+writeOSInformation();
