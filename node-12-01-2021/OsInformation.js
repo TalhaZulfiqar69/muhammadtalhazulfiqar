@@ -1,6 +1,6 @@
-const fs = require("fs");
-const os = require("os");
-require("dotenv").config();
+const fs = require('fs');
+const os = require('os');
+require('dotenv').config();
 
 let cup = os.cpus();
 let platform = os.platform();
@@ -16,7 +16,7 @@ ${JSON.stringify(OsInfo)}.`;
 
 fs.writeFile(process.env.PATH_WITH_FILE_NAME, OsInformation, (err) => {
   if (err) throw err;
-  console.log("Task completed");
+  console.log('Task completed');
 });
 
 module.exports = fs;
