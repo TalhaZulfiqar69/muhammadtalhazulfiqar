@@ -35,7 +35,7 @@ const writeOSInformation = () => {
               resolve(path.join(`${dirName}/${process.env.FILE_NAME}`));
               // eslint-disable-next-line no-console
               console.log('File has been created successfully');
-            },
+            }
           );
         });
       }
