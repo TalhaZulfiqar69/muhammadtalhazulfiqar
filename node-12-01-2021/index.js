@@ -20,7 +20,7 @@ const filPath = path.join(`${dirName}/${process.env.FILE_NAME}`);
 const writeOSInformation = () => {
   try {
     // eslint-disable-next-line consistent-return
-    fs.open(filPath, 'r', (err) => {
+    fs.access(filPath, (err) => {
       if (err) {
         return new Promise((resolve, reject) => {
           fs.writeFile(
